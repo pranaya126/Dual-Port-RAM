@@ -1,0 +1,24 @@
+module dram_tb;
+reg clk;
+reg [3:0]addr_a;
+reg [3:0]addr_b;
+reg [3:0]data_in_a;
+reg [3:0]data_in_b
+;reg we_a; reg we_b;
+wire [3:0]data_out_a;
+wire[3:0]data_out_b;
+dram
+uut(clk,addr_a,addr_b,data_in_a,data_in_b,we_a,we_b,data_out_a,data_out_b); initial
+begin clk = 0;
+forever #5 clk = ~clk; end
+initial begin we_a=1;
+#10 data_in_a=4'b0010;addr_a=4'b0;
+#10;
+#10 addr_a=4'b0;
+#10 we_a=0; we_b=1;
+#10 data_in_b=4'b0001;addr_b=4'b0001;
+#10;
+#10 addr_b=4'b0001;
+#10;
+we_b=0;
+end endmodule
